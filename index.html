@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siri Vennela Engineering Works</title>
+    <style>
+        :root {
+            --primary: #1e3a8a; /* Deep Construction Blue */
+            --accent: #f59e0b;  /* Safety Yellow / Amber */
+            --dark: #1f2937;    /* Charcoal Gray */
+            --light: #f9fafb;   /* Off White */
+            --gray: #6b7280;    /* Muted Gray */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #ffffff;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 58, 138, 0.85), rgba(31, 41, 55, 0.9)), url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&h=800&fit=crop') no-repeat center center/cover;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            color: #e5e7eb;
+        }
+
+        .btn {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 4px;
+            text-transform: uppercase;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #d97706;
+        }
+
+        /* Section Global Settings */
+        section {
+            padding: 70px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto 0 auto;
+        }
+
+        /* Interactive Project Portfolio Layout */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: #ffffff;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .project-info p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Cost Estimator Feature */
+        .calculator-box {
+            background: #ffffff;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .calc-result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            font-size: 18px;
+            font-weight: 700;
+            color: #14532d;
+            text-align: center;
+            display: none;
+        }
+
+        .calc-result.show {
+            display: block;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: #ffffff;
+            border-radius: 6px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .team-member-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-color: #e5e7eb;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-info h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .team-member-info p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent);
+        }
+
+        .testimonial p {
+            font-style: italic;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 15px;
+        }
+
+        .contact-item-icon {
+            font-size: 24px;
+            color: var(--accent);
+            min-width: 30px;
+        }
+
+        .contact-item-content h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .contact-item-content p {
+            color: var(--gray);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: #1e3a8a;
+        }
+
+        /* Footer Info */
+        footer {
+            background: var(--dark);
+            color: #ffffff;
+            text-align: center;
+            padding: 30px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-links a {
+                margin-left: 0;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            section {
+                padding: 50px 5%;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navigation Area -->
+    <nav>
+        <div class="logo">Siri Vennela <span>Engineering Works</span></div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Our Work</a>
+            <a href="#team">Team</a>
+            <a href="#estimator">Cost Estimator</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Welcome Hero Area -->
+    <header class="hero">
+        <h1>Building Your Vision Safely</h1>
+        <p>Expert structural fabrication, heavy plant modifications, and industrial piping layouts executed on time and within budget.</p>
+        <a href="#estimator" class="btn">Try Instant Cost Estimator</a>
+    </header>
+
+    <!-- Business Capability Section -->
+    <section id="about">
+        <h2 class="section-title">Corporate Strengths</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 20px;">
+            <div style="background: #fff; padding: 25px; border-top: 4px solid var(--primary); border-radius: 4px;">
+                <h3 style="color: var(--primary); margin-bottom: 10px;">🌟 Premium Safety</h3>
+                <p style="color: var(--gray);">Proud 3-Star Certified Vendor with Tata Steel CSMS framework metrics.</p>
+            </div>
+            <div style="background: #fff; padding: 25px; border-top: 4px solid var(--accent); border-radius: 4px;">
+                <h3 style="color: var(--primary); margin-bottom: 10px;">🏗️ Heavy Capacity</h3>
+                <p style="color: var(--gray);">Equipped with dynamic heavy-lift rigging configurations up to 170 Tons.</p>
+            </div>
+            <div style="background: #fff; padding: 25px; border-top: 4px solid var(--primary); border-radius: 4px;">
+                <h3 style="color: var(--primary); margin-bottom: 10px;">👥 Large Workforce</h3>
+                <p style="color: var(--gray);">Over 1,000 experienced technical site crew and field safety operators.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Filterable Portfolio Section -->
+    <section id="projects" style="background-color: #f1f5f9;">
+        <h2 class="section-title">Featured Projects</h2>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterProjects('all')">All Works</button>
+            <button class="filter-btn" onclick="filterProjects('industrial')">Industrial / Steel</button>
+            <button class="filter-btn" onclick="filterProjects('infrastructure')">Infrastructure</button>
+        </div>
+
+        <div class="portfolio-grid">
+            <div class="project-card industrial" data-category="industrial">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&h=300&fit=crop');"></div>
+                <div class="project-info">
+                    <h3>Tata Steel Kalinganagar</h3>
+                    <p>BF#2 Stock House & Heavy Structural Assembly Works</p>
+                </div>
+            </div>
+            <div class="project-card infrastructure" data-category="infrastructure">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=300&fit=crop');"></div>
+                <div class="project-info">
+                    <h3>HPCL Refinery Layouts</h3>
+                    <p>Conveyor Line Frameworks & High Pressure Industrial Piping</p>
+                </div>
+            </div>
+            <div class="project-card industrial" data-category="industrial">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1581092161562-40038f60dd84?w=400&h=300&fit=crop');"></div>
+                <div class="project-info">
+                    <h3>JSW Steel Fabrication</h3>
+                    <p>Critical Equipment Installation & Testing Framework</p>
+                </div>
+            </div>
+            <div class="project-card infrastructure" data-category="infrastructure">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1581092163292-8d1e271e1542?w=400&h=300&fit=crop');"></div>
+                <div class="project-info">
+                    <h3>Highway Bridge Module</h3>
+                    <p>Pre-fabricated Bridge Segments & Installation</p>
+                </div>
+            </div>
+            <div class="project-card industrial" data-category="industrial">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1586958907529-b1b27c3f6be0?w=400&h=300&fit=crop');"></div>
+                <div class="project-info">
+                    <h3>Petrochemical Complex</h3>
+                    <p>Modular Fabrication & On-site Assembly</p>
+                </div>
+            </div>
+            <div class="project-card infrastructure" data-category="infrastructure">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1581092161562-40038f60dd84?w=400&h=300&fit=crop');"></div>
+                <div class="project-info">
+                    <h3>Water Treatment Plant</h3>
+                    <p>Structural Steel & Utility Integration Works</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <h2 class="section-title">Our Leadership Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-member-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop');"></div>
+                <div class="team-member-info">
+                    <h3>Giribabu</h3>
+                    <p>Chief Executive Officer & Founder</p>
+                    <p style="font-size: 12px; margin-top: 8px;">20+ years in structural engineering</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-img" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=300&fit=crop');"></div>
+                <div class="team-member-info">
+                    <h3>Priya Sharma</h3>
+                    <p>Operations Manager</p>
+                    <p style="font-size: 12px; margin-top: 8px;">15+ years in project management</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-member-img" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=300&fit=crop');"></div>
+                <div class="team-member-info">
+                    <h3>Arjun Desai</h3>
+                    <p>Technical Director</p>
+                    <p style="font-size: 12px; margin-top: 8px;">Certified structural engineer & CAD specialist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section style="background-color: #f1f5f9;">
+        <h2 class="section-title">Client Testimonials</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <p>"Siri Vennela Engineering Works delivered our complex fabrication project ahead of schedule without compromising quality. Their team's expertise was exceptional."</p>
+                <div class="testimonial-author">- Vikram Menon, Tata Steel</div>
+            </div>
+            <div class="testimonial">
+                <p>"Professional, reliable, and safety-conscious. They integrated seamlessly with our team and exceeded all our expectations."</p>
+                <div class="testimonial-author">- Neha Patel, HPCL Refinery</div>
+            </div>
+            <div class="testimonial">
+                <p>"Outstanding coordination and execution. Their heavy lifting capabilities solved our most challenging logistical problems."</p>
+                <div class="testimonial-author">- Amit Kumar, JSW Steel</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Estimator Section -->
+    <section id="estimator">
+        <h2 class="section-title">Cost Estimator</h2>
+        <div class="calculator-box">
+            <form onsubmit="calculateCost(event)">
+                <div class="form-group">
+                    <label for="project-type">Project Type</label>
+                    <select id="project-type" required>
+                        <option value="">Select a project type</option>
+                        <option value="structural">Structural Fabrication</option>
+                        <option value="piping">Industrial Piping</option>
+                        <option value="installation">Equipment Installation</option>
+                        <option value="maintenance">Maintenance Work</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="scope">Project Scope (Square Meters)</label>
+                    <input type="number" id="scope" placeholder="Enter area in sq.m" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="complexity">Complexity Level</label>
+                    <select id="complexity" required>
+                        <option value="">Select complexity</option>
+                        <option value="basic">Basic</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeline">Required Timeline (Days)</label>
+                    <input type="number" id="timeline" placeholder="Enter timeline in days" required>
+                </div>
+
+                <button type="submit" class="btn">Calculate Estimate</button>
+            </form>
+
+            <div class="calc-result" id="result">
+                Estimated Cost: <span id="cost-value">₹ 0</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background-color: #f1f5f9;">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-item-icon">📍</div>
+                    <div class="contact-item-content">
+                        <h4>Address</h4>
+                        <p>Ramdas Colony, Dawlgiri<br>Jajpur Road, Odisha<br>India</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">📞</div>
+                    <div class="contact-item-content">
+                        <h4>Phone</h4>
+                        <p>+91 97130 59713</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">✉️</div>
+                    <div class="contact-item-content">
+                        <h4>Email</h4>
+                        <p>sirivennelaeng@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">⏰</div>
+                    <div class="contact-item-content">
+                        <h4>Business Hours</h4>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 2:00 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form" onsubmit="handleContactForm(event)">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="text" placeholder="Subject" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Siri Vennela Engineering Works. All rights reserved.</p>
+        <p>Proud 3-Star Certified Vendor | Safety First | Quality Assured</p>
+        <p>Contact: Giribabu | Phone: +91 97130 59713 | Email: sirivennelaeng@gmail.com</p>
+    </footer>
+
+    <script>
+        // Filter Projects
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Calculate Cost
+        function calculateCost(event) {
+            event.preventDefault();
+
+            const projectType = document.getElementById('project-type').value;
+            const scope = parseFloat(document.getElementById('scope').value);
+            const complexity = document.getElementById('complexity').value;
+            const timeline = parseFloat(document.getElementById('timeline').value);
+
+            // Base rates per sq.m
+            const baseRates = {
+                structural: 2500,
+                piping: 3000,
+                installation: 2000,
+                maintenance: 1500
+            };
+
+            // Complexity multipliers
+            const complexityMultipliers = {
+                basic: 1,
+                intermediate: 1.5,
+                advanced: 2.5
+            };
+
+            // Timeline urgency factor
+            const urgencyFactor = 100 / timeline; // Higher urgency = higher cost
+
+            let baseCost = baseRates[projectType] * scope;
+            let complexityCost = baseCost * complexityMultipliers[complexity];
+            let urgencyCost = complexityCost * (1 + urgencyFactor / 100);
+
+            const totalCost = Math.round(urgencyCost);
+
+            document.getElementById('cost-value').textContent = `₹ ${totalCost.toLocaleString('en-IN')}`;
+            document.getElementById('result').classList.add('show');
+        }
+
+        // Handle Contact Form
+        function handleContactForm(event) {
+            event.preventDefault();
+            alert('Thank you for reaching out! We will contact you soon.');
+            event.target.reset();
+        }
+    </script>
+
+</body>
+</html>
